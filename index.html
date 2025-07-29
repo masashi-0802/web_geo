@@ -14,7 +14,7 @@
   <main>
     <section class="profile">
       <h2>👤 自己紹介</h2>
-      <p>こんにちは!アホです磯野雅志です。GeoGuessrを1年以上プレイしており、世界マップに情熱を持っています。現在はWebページ制作に挑戦中です！</p>
+      <p>初めまして!このWebサイトを執筆した「ただのちゃる」です。筆者は、GeoGuessrを1年以上プレイしており、世界マップに情熱を持っています。現在はWebページ制作に挑戦中です！</p>
     </section>
 
     <section class="interests">
@@ -25,6 +25,21 @@
         <li>Web開発・UI設計</li>
       </ul>
     </section>
+    <section class="hint">
+      <h2>🧠 GeoGuessrヒント</h2>
+      <button onclick="showHint()">今日のヒントを見る</button>
+      <p id="hint-box" style="display: none; margin-top: 10px;"></p>
+    </section>
+    
+    <script>
+      function showHint() {
+        const hint = "電柱に文字がある → アジア圏の可能性が高い！";
+        const hintBox = document.getElementById("hint-box");
+        hintBox.textContent = hint;
+        hintBox.style.display = "block";
+      }
+    </script>
+    
 
     <section class="map-link">
       <h2>📌 お気に入りのマップ</h2>
