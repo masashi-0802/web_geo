@@ -56,13 +56,13 @@ body {
   color:#0c0101;               /* 文字色を明示 */
   background:#fff;          /* 背景は白 */
   border:1px solid #0d0e11; /* 薄い枠線で可読性UP */
-  font-weight:600;
+  font: weight 90px;
 }
-.choices button:hover{ background:#f8fafc; }
+.choices button:hover{ background:#d5d8dc; }
 
 
-.choices button:hover { background: #e2e8f0; }
+.choices button:hover { background: #dfe3e8; }
 .choices button:disabled { opacity: .6; cursor: default; }
-.result { font-weight: 700; margin-top: .5rem; }
-.explanation { margin-top: .5rem; color: #333; }
+.result { font-weight: 1000; margin-top: .5rem; }
+.explanation { margin-top: .5rem; color: #080404; }
 .actions { margin-top: 1rem; text-align: right; }
