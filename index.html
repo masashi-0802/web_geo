@@ -1,66 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GeoGuessr世界攻略 — ホーム</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <meta name="description" content="GeoGuessr世界マップの魅力と勝ち方をやさしく解説。今日の一問、初心者ロードマップ、国別メタ、コミュニティ案内。" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GeoGuessr世界攻略!（完全版）</title>
+  <!-- 共通スタイル -->
+  <link rel="stylesheet" href="style.css">
+  <!-- クイズ用の軽量スタイル（既存の guiz.css を使用） -->
+  <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="/">
-        <span class="logo" aria-hidden="true"></span>
-        <span>GeoGuessr世界攻略</span>
-      </a>
-      <nav aria-label="主要">
-        <ul>
-          <li><a class="active" href="/">ホーム</a></li>
-          <li><a href="quiz.html">今日の一問</a></li>
-          <li><a href="roadmap.html">初心者ロードマップ</a></li>
-          <li><a href="countries.html">国別メタ</a></li>
-          <li><a href="community.html">コミュニティ</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <h1>GeoGuessr世界攻略!（完全版）</h1>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="panel">
-        <div class="kicker">世界マップの面白さを、誰でも。</div>
-        <h1>GeoGuessr世界攻略（非公式ファンサイト）</h1>
-        <p class="lede">作者：ただのちゃる。世界マップの勝ち方／楽しみ方を、初心者にも伝わる形で整理する。毎日1問のクイズ、基本の学習ロードマップ、国別メタ情報、そして大会やDiscordなどのコミュニティ情報を掲載。</p>
-        <div class="cta-row">
-          <a class="btn primary" href="quiz.html">今日の一問へ</a>
-          <a class="btn secondary" href="roadmap.html">まずは学び方を見る</a>
-        </div>
-      </div>
-      <div class="panel">
-        <h2 style="margin:.2rem 0 .6rem 0">🧠 今日のヒント</h2>
-        <p id="hint-box">中央線の色、路肩ポール、ガードレール、電柱、標識フォントを観察する。</p>
-        <div class="cta-row"><button class="btn secondary" id="hint-btn" type="button">別のヒントを表示</button></div>
-      </div>
+  <main>
+    <section class="profile">
+      <h2>👤 自己紹介</h2>
+      <p>初めまして!<br>このWebサイトを執筆した「ただのちゃる」です。<br>筆者は、GeoGuessrを1年以上プレイしており、世界マップに情熱を持っています。現在はWebページ制作に挑戦中です！</p>
     </section>
 
-    <section class="jump">
-      <div class="card">
-        <div class="head"><h2 style="margin:0">コンテンツ</h2></div>
-        <div class="body links">
-          <a class="card-link" href="quiz.html">🧩 今日の一問</a>
-          <a class="card-link" href="roadmap.html">🚀 初心者ロードマップ</a>
-          <a class="card-link" href="countries.html">🗺️ 国別メタ情報</a>
-          <a class="card-link" href="community.html">🤝 コミュニティ・大会</a>
+    <section class="hint">
+      <h2>🧠 GeoGuessrヒント</h2>
+      <button id="hint-btn" type="button">今日のヒントを見る</button>
+      <p id="hint-box" style="display:none; margin-top:10px;"></p>
+    </section>
+
+    <section class="links">
+      <h2>📌 リンク</h2>
+      <ul>
+        <li><a href="quiz.html">今日の一問（単独ページ版）</a></li>
+        <li><a href="countries.html">国別メタ（後日作成予定）</a></li>
+        <li><a href="community.html">コミュニティ・大会（後日作成予定）</a></li>
+      </ul>
+    </section>
+
+    <!-- =================== ホーム最下部：今日の一問 =================== -->
+    <section class="daily-quiz">
+      <div class="container">
+        <h2>🧩 今日の一問</h2>
+        <p>次のストリートビューはどこの国でしょう？</p>
+        <div class="sv-wrap">
+          <iframe id="sv-frame"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="">
+          </iframe>
+        </div>
+        <div id="choices" class="choices" role="group" aria-label="選択肢"></div>
+        <div id="result" class="result" aria-live="polite"></div>
+        <div id="explanation" class="explanation"></div>
+        <div class="actions">
+          <button id="next-btn" style="display:none;">次の問題へ</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <small>© 2025 ただのちゃる — 非公式ファンサイト。地図画像・データは各提供元に帰属。</small>
+    <small>© 2025 ただのちゃる。地図画像・データは各提供元に帰属。</small>
   </footer>
 
+  <!-- ページ専用スクリプト（ヒント） -->
   <script>
     const HINTS = [
       "黄の中央線＋白の路肩線の組み合わせに注目する。",
@@ -69,10 +71,18 @@
       "標識フォントの丸み/角張り/字間に注意。",
       "電線の数と張り方、碍子の形もヒント。",
     ];
-    document.getElementById('hint-btn').addEventListener('click', ()=>{
-      const i = Math.floor(Math.random()*HINTS.length);
-      document.getElementById('hint-box').textContent = HINTS[i];
-    });
+    const hintBtn = document.getElementById('hint-btn');
+    const hintBox = document.getElementById('hint-box');
+    if (hintBtn) {
+      hintBtn.addEventListener('click', () => {
+        const i = Math.floor(Math.random() * HINTS.length);
+        hintBox.textContent = HINTS[i];
+        hintBox.style.display = 'block';
+      });
+    }
   </script>
+
+  <!-- クイズ本体（ホーム最下部のDOMに対して動作） -->
+  <script src="quiz.js"></script>
 </body>
 </html>
