@@ -6,7 +6,7 @@
   <title>GeoGuessr世界攻略!（完全版）</title>
   <!-- 共通スタイル -->
   <link rel="stylesheet" href="style.css">
-  <!-- クイズ用の軽量スタイル（既存の guiz.css を使用） -->
+  <!-- クイズ用の軽量スタイル（既存の quiz.css を使用） -->
   <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
@@ -16,14 +16,32 @@
 
   <main>
     <section class="profile">
-      <h2>👤 自己紹介</h2>
-      <p>初めまして!<br>このWebサイトを執筆した「ただのちゃる」です。<br>筆者は、GeoGuessrを1年以上プレイしており、世界マップに情熱を持っています。現在はWebページ制作に挑戦中です！</p>
+      <h2>このサイトの作成者は誰？？</h2>
+      <p>初めまして!
+        <br>このWebサイトを執筆した「ただのちゃる」です。
+        <br>筆者は、GeoGuessrを2024年4月から世界マップを本格的に始め、Geoguessr歴はちょうど1年ちょいです！
+        <br>私は、Geoguessrの世界マップをプレイする日本人の方が少ない、、という現状を少しでも改善したく、このようなGeoguessr世界マップ攻略サイトを立ち上げました!
+        <br>Webサイトは順次更新予定ですので、何かアドバイスや意見などありましたらどしどしコメントしてください！お待ちしてます！
+      </p>
     </section>
 
+    <!-- 旧：buttonで開く方式 は削除 -->
     <section class="hint">
-      <h2>🧠 GeoGuessrヒント</h2>
-      <button id="hint-btn" type="button">今日のヒントを見る</button>
-      <p id="hint-box" style="display:none; margin-top:10px;"></p>
+      <h2>🧠 今日のGeoGuessr攻略ヒント</h2>
+
+      <!-- 画像（Street View埋め込み） -->
+      <div class="sv-wrap">
+        <iframe id="hint-frame"
+                title="ヒント用ストリートビュー"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="">
+        </iframe>
+      </div>
+
+      <!-- この画像から読み取れるヒント -->
+      <ul id="hint-list"></ul>
     </section>
 
     <section class="links">
@@ -79,6 +97,40 @@
         hintBox.textContent = HINTS[i];
         hintBox.style.display = 'block';
       });
+    }
+  </script>
+  <!-- ページ専用スクリプト（ヒント：画像＋箇条書き） -->
+  <script>
+    // 画像1枚＋その画像に紐づくヒント（必要に応じて日替わり化もOK）
+    const HINT_OF_DAY = {
+      // 例：あなたが動作確認できた埋め込みURLを置く
+      src: "https://www.google.com/maps/embed?pb=!4v1754752685624!6m8!1m7!1soKQo8salQ_Ec6tLZ5eRqfg!2m2!1d42.8538655940137!2d68.30586004515008!3f123.91430334236529!4f4.975812798452466!5f0.4494136891971475",
+      hints: [
+        "路肩の舗装と砂利の出方：乾燥地帯の典型。",
+        "電柱・標識の形状：角ばった桁とボルト位置に注目。",
+        "中央線が黄・路肩線が白：中アジアの定番パターン。",
+        "地平線までの見通し：ゆるい起伏の草原地形。"
+      ]
+    };
+
+    function renderHint() {
+      const iframe = document.getElementById('hint-frame');
+      const list   = document.getElementById('hint-list');
+      if (!iframe || !list) return;
+
+      iframe.src = HINT_OF_DAY.src;
+      list.innerHTML = "";
+      HINT_OF_DAY.hints.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        list.appendChild(li);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderHint);
+    } else {
+      renderHint();
     }
   </script>
 
