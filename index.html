@@ -13,7 +13,13 @@
   <header>
     <h1>GeoGuessr世界攻略!（完全版）</h1>
   </header>
-
+  <nav class="global-nav">
+    <ul>
+      <li><a href="countries.html">国別メタ</a></li>
+      <li><a href="roadmap.html">初心者用世界マップ攻略方法</a></li>
+      <li><a href="community.html">GeoGuessrコミュニティ</a></li>
+    </ul>
+  </nav>
   <main>
     <section class="profile">
       <h2>このサイトの作成者は誰？？</h2>
@@ -25,10 +31,8 @@
       </p>
     </section>
 
-    <!-- 旧：buttonで開く方式 は削除 -->
     <section class="hint">
       <h2>🧠 今日のGeoGuessr攻略ヒント</h2>
-
       <!-- 画像（Street View埋め込み） -->
       <div class="sv-wrap">
         <iframe id="hint-frame"
@@ -39,7 +43,6 @@
                 src="">
         </iframe>
       </div>
-
       <!-- この画像から読み取れるヒント -->
       <ul id="hint-list"></ul>
     </section>
@@ -73,6 +76,16 @@
         <div class="actions">
           <button id="next-btn" style="display:none;">次の問題へ</button>
         </div>
+      </div>
+    </section>
+
+    <!-- 筆者プロフィールカード -->
+    <section class="author-profile">
+      <img src="images/profile_icon.png" alt="プロフィールアイコン" width="64" height="64">
+      <div>
+        <div class="author-name">ただのちゃる</div>
+        <div class="author-desc">GeoGuessr歴1年。世界マップを日本語で攻略・紹介しています。</div>
+        <div class="author-sns"><a href="#">X (Twitter)</a></div>
       </div>
     </section>
   </main>
@@ -113,12 +126,10 @@
         "地平線までの見通し：ゆるい起伏の草原地形。"
       ]
     };
-
     function renderHint() {
       const iframe = document.getElementById('hint-frame');
       const list   = document.getElementById('hint-list');
       if (!iframe || !list) return;
-
       iframe.src = HINT_OF_DAY.src;
       list.innerHTML = "";
       HINT_OF_DAY.hints.forEach(t => {
@@ -127,14 +138,12 @@
         list.appendChild(li);
       });
     }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderHint);
     } else {
       renderHint();
     }
   </script>
-
   <!-- クイズ本体（ホーム最下部のDOMに対して動作） -->
   <script src="quiz.js"></script>
 </body>
