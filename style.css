@@ -4,12 +4,12 @@
   --radius:16px; --shadow:0 18px 50px rgba(6,12,28,.35);
 }
 header {
-  background-color:#2c3e50; /* ←元の色は残しておくと画像未読込時も安心 */
+  background-color:#aeb7bf; /* ←元の色は残しておくと画像未読込時も安心 */
   background-image: url("images/header.jpeg"); /* 画像パスに置き換え */
   background-size: cover;       /* ヘッダ全体にフィットさせる */
   background-position: center;  /* 中央に配置 */
   background-repeat: no-repeat; /* 繰り返さない */
-  color: white;
+  color: rgb(15, 14, 14);
   padding: 1.5rem 1rem;
   text-align: center;
 }
@@ -26,12 +26,7 @@ body{
 }
 
 /* ヘッダ */
-header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(140%) blur(10px);
-  background:rgba(10,16,32,.55);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
+
 header h1{
   margin:0; padding:1.1rem 1rem; text-align:center; font-weight:800;
   letter-spacing:.3px;
