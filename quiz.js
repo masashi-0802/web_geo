@@ -1,74 +1,83 @@
-// ① 問題データ（例）：iframeのsrcは Googleマップ「埋め込み」から取得して貼る
-const QUIZZES = [
+// ================= 問題データ =================
+const QUESTIONS = [
     {
-      // 例：フィンランド・ヘルシンキのストリートビュー埋め込みURL
-      // src には <iframe src="..."> の中身を入れる
-      src: "<iframe src="https://www.google.com/maps/embed?pb=!4v1754752685624!6m8!1m7!1soKQo8salQ_Ec6tLZ5eRqfg!2m2!1d42.8538655940137!2d68.30586004515008!3f123.91430334236529!4f4.975812798452466!5f0.4494136891971475" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>",
-      correct: "フィンランド",
-      choices: ["スウェーデン","ノルウェー","フィンランド","カナダ"],
-      explanation: "標識や白樺などの植生が手がかり。フィンランド語表記にも注目。"
+      id: 'kz-s1',
+      // 依頼で提示された埋め込みURL
+      src: 'https://www.google.com/maps/embed?pb=!4v1754752685624!6m8!1m7!1soKQo8salQ_Ec6tLZ5eRqfg!2m2!1d42.8538655940137!2d68.30586004515008!3f123.91430334236529!4f4.975812798452466!5f0.4494136891971475',
+      options: ['カザフスタン','モンゴル','キルギス','ウズベキスタン'],
+      answer: 'カザフスタン',
+      explanation: '乾燥草原の地形、道路の舗装と路肩の質、標識傾向など中アジア要素。'
     },
     {
-      src: "https://www.google.com/maps/embed?pb=【別の地点のURL】",
-      correct: "オーストラリア",
-      choices: ["南アフリカ","オーストラリア","ニュージーランド","イギリス"],
-      explanation: "左側通行、道路標識の形、乾燥した植生がヒント。"
+      id: 'jp-s1',
+      src: 'https://www.google.com/maps/embed?pb=!4v1700000000000!6m8!1m7!1s7J9y8JrUoJrK!2m2!1d35.681236!2d139.767125!3f130!4f0!5f0.7820865974627469',
+      options: ['日本','韓国','台湾','中国'],
+      answer: '日本',
+      explanation: '左側通行、青地の案内標識、コンクリ電柱など日本固有の要素。'
     }
   ];
   
-  // ② ランダムで1問選ぶ（将来は「今日分の固定」にしてもOK）
-  let currentIndex = Math.floor(Math.random() * QUIZZES.length);
+  // ================= 日替わりインデックス =================
+  function dayOfYearUtc(d=new Date()){
+    const y=d.getUTCFullYear();
+    const start=Date.UTC(y,0,1);
+    const today=Date.UTC(y,d.getUTCMonth(),d.getUTCDate());
+    return Math.floor((today-start)/86400000);
+  }
+  function dailyIndex(){
+    return dayOfYearUtc()%QUESTIONS.length;
+  }
   
-  const frame = document.getElementById("sv-frame");
-  const choicesBox = document.getElementById("choices");
-  const resultBox = document.getElementById("result");
-  const expBox = document.getElementById("explanation");
-  const nextBtn = document.getElementById("next-btn");
+  // ================= DOM 取得（ホームにも単独ページにも対応） =================
+  const qIdEl = document.getElementById('q-id') || document.createElement('span');
+  const svEl = document.getElementById('sv-frame');
+  const choicesEl = document.getElementById('choices');
+  const resultEl = document.getElementById('result');
+  const expEl = document.getElementById('explanation');
+  const nextBtn = document.getElementById('next-btn');
   
-  function renderQuiz(index) {
-    const q = QUIZZES[index];
-    frame.src = q.src;
+  if (svEl && choicesEl && resultEl && expEl && nextBtn) {
+    initQuiz();
+  }
   
-    // 選択肢ボタン生成（シャッフル）
-    const opts = shuffle([...q.choices]);
-    choicesBox.innerHTML = "";
-    opts.forEach(label => {
-      const btn = document.createElement("button");
-      btn.textContent = label;
-      btn.onclick = () => checkAnswer(label, q);
-      choicesBox.appendChild(btn);
+  function renderQuestion(q){
+    if (qIdEl) qIdEl.textContent = `#${q.id}`;
+    svEl.src = q.src;
+    resultEl.textContent='';
+    resultEl.className='result';
+    expEl.textContent='';
+    choicesEl.innerHTML='';
+    q.options.forEach(opt=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.textContent=opt;
+      btn.addEventListener('click',()=>onAnswer(q,btn,opt));
+      choicesEl.appendChild(btn);
     });
-  
-    resultBox.textContent = "";
-    resultBox.style.color = "";
-    expBox.textContent = "";
-    nextBtn.style.display = "none";
+    nextBtn.style.display='none';
   }
   
-  function checkAnswer(selected, q) {
-    const isCorrect = selected === q.correct;
-    resultBox.textContent = isCorrect ? "🎉 正解！" : `❌ 不正解（正解：${q.correct}）`;
-    resultBox.style.color = isCorrect ? "green" : "crimson";
-    expBox.textContent = q.explanation;
-  
-    // ボタン無効化
-    choicesBox.querySelectorAll("button").forEach(b => b.disabled = true);
-    nextBtn.style.display = "inline-block";
+  function onAnswer(q,btn,chosen){
+    [...choicesEl.querySelectorAll('button')].forEach(b=>b.disabled=true);
+    const ok = (chosen===q.answer);
+    resultEl.textContent = ok? '正解！' : `不正解… 正解は「${q.answer}」`;
+    resultEl.className = 'result ' + (ok? 'ok':'ng');
+    expEl.textContent = q.explanation;
+    try{
+      const key='gwq-history';
+      const hist=JSON.parse(localStorage.getItem(key)||'[]');
+      hist.push({id:q.id,ok,t:Date.now()});
+      localStorage.setItem(key, JSON.stringify(hist.slice(-500))); // 直近500件
+    }catch(e){}
+    nextBtn.style.display='inline-block';
   }
   
-  function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = (Math.random() * (i + 1)) | 0;
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+  function renderDaily(){ renderQuestion(QUESTIONS[dailyIndex()]); }
+  
+  function initQuiz(){
+    renderDaily();
+    nextBtn.addEventListener('click',()=>{
+      const r=Math.floor(Math.random()*QUESTIONS.length);
+      renderQuestion(QUESTIONS[r]);
+    });
   }
-  
-  nextBtn.addEventListener("click", () => {
-    // 既出防止するなら履歴管理を足す。今は単純に次へ
-    currentIndex = (currentIndex + 1) % QUIZZES.length;
-    renderQuiz(currentIndex);
-  });
-  
-  renderQuiz(currentIndex);
-  
