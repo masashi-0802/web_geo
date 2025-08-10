@@ -64,5 +64,5 @@ body {
 .choices button:hover { background: #dfe3e8; }
 .choices button:disabled { opacity: .6; cursor: default; }
 .result { font-weight: 1000; margin-top: .5rem; }
-.explanation { margin-top: .5rem; color: #080404; }
+.explanation { margin-top: .5rem; color: #0c0909; }
 .actions { margin-top: 1rem; text-align: right; }
