@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>お問い合わせ - GeoGuessr世界攻略</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>GeoGuessr世界攻略!（完全版）</h1>
+    <!-- 共通ヘッダーのナビゲーション（他ページと同じ） -->
+    <nav class="global-nav">
+      <ul>
+        <li><a href="countries.html">国別メタ</a></li>
+        <li><a href="world.html">初心者向け世界マップ攻略</a></li>
+        <li><a href="community.html">GeoGuessrコミュニティ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <h2>お問い合わせ</h2>
+      <p>ご質問やご連絡は、以下のフォームからお気軽にお送りください。</p>
+
+      <!-- フォーム本体 -->
+      <form class="contact-form" action="https://formspree.io/f/yourFormID" method="POST">
+        <!-- 名前フィールド -->
+        <label for="name">お名前</label>
+        <input type="text" id="name" name="name" required />
+
+        <!-- メールアドレスフィールド -->
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" name="_replyto" required />
+
+        <!-- お問い合わせ内容フィールド -->
+        <label for="message">お問い合わせ内容</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <!-- フォーム送信時に現在ページにリダイレクトしてサンクス表示 -->
+        <input type="hidden" name="_next" value="contact.html?success=1" />
+        <!-- 送信ボタン -->
+        <button type="submit">送信</button>
+      </form>
+
+      <!-- サンクスメッセージ（送信後に表示） -->
+      <div id="thank-message" style="display: none; text-align: center; margin: 2rem 0;">
+        お問い合わせありがとうございます。送信が完了しました。
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>
+      © 2025 ただのちゃる。地図画像・データは各提供元に帰属。
+      | <a href="contact.html">お問い合わせ</a>
+    </small>
+  </footer>
+
+  <!-- サンクスメッセージ表示用スクリプト -->
+  <script>
+    // URLにsuccessパラメータがあればサンクスメッセージを表示
+    if (window.location.search.includes('success=1')) {
+      document.querySelector('form.contact-form').style.display = 'none';
+      document.getElementById('thank-message').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

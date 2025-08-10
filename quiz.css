@@ -56,7 +56,7 @@ body {
   color:#0c0101;               /* 文字色を明示 */
   background:#fff;          /* 背景は白 */
   border:1px solid #0d0e11; /* 薄い枠線で可読性UP */
-  font: weight 90px;
+  font: weight 200px;
 }
 .choices button:hover{ background:#d5d8dc; }
 

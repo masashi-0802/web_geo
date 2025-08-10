@@ -21,77 +21,105 @@
     </ul>
   </nav>
   <main>
-    <section class="profile">
-      <h2>このサイトの作成者は誰？？</h2>
-      <p>初めまして!
-        <br>このWebサイトを執筆した「ただのちゃる」です。
-        <br>筆者は、GeoGuessrを2024年4月から世界マップを本格的に始め、Geoguessr歴はちょうど1年ちょいです！
-        <br>私は、Geoguessrの世界マップをプレイする日本人の方が少ない、、という現状を少しでも改善したく、このようなGeoguessr世界マップ攻略サイトを立ち上げました!
-        <br>Webサイトは順次更新予定ですので、何かアドバイスや意見などありましたらどしどしコメントしてください！お待ちしてます！
-      </p>
-    </section>
-
-    <section class="hint">
-      <h2>🧠 今日のGeoGuessr攻略ヒント</h2>
-      <!-- 画像（Street View埋め込み） -->
-      <div class="sv-wrap">
-        <iframe id="hint-frame"
-                title="ヒント用ストリートビュー"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                src="">
-        </iframe>
-      </div>
-      <!-- この画像から読み取れるヒント -->
-      <ul id="hint-list"></ul>
-    </section>
-
-    <section class="links">
-      <h2>📌 リンク</h2>
+    <!-- ページ内目次（Table of Contents） -->
+    <nav class="toc">
+      <strong>目次</strong>
       <ul>
-        <li><a href="quiz.html">今日の一問（単独ページ版）</a></li>
-        <li><a href="countries.html">国別メタ（後日作成予定）</a></li>
-        <li><a href="community.html">コミュニティ・大会（後日作成予定）</a></li>
+        <li><a href="#profile">自己紹介&本サイトの説明「</a></li>
+        <li><a href="#news">Geoguessr新着情報</a></li>
+        <li><a href="#hints">GeoGuessr攻略ヒント</a></li>
+        <li><a href="#quiz">今日の一問</a></li>
       </ul>
-    </section>
+    </nav>
 
-    <!-- =================== ホーム最下部：今日の一問 =================== -->
-    <section class="daily-quiz">
-      <div class="container">
-        <h2>🧩 今日の一問</h2>
-        <p>次のストリートビューはどこの国でしょう？</p>
-        <div class="sv-wrap">
-          <iframe id="sv-frame"
-                  allowfullscreen
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="">
-          </iframe>
-          <div class="sv-mask sv-mask-tl"></div> <!-- これを追加 -->
-        </div>
-        <div id="choices" class="choices" role="group" aria-label="選択肢"></div>
-        <div id="result" class="result" aria-live="polite"></div>
-        <div id="explanation" class="explanation"></div>
-        <div class="actions">
-          <button id="next-btn" style="display:none;">次の問題へ</button>
-        </div>
-      </div>
-    </section>
+    <div class="content-wrapper">
+      <!-- メインコンテンツ（左カラム） -->
+      <div class="main-content">
 
-    <!-- 筆者プロフィールカード -->
-    <section class="author-profile">
-      <img src="images/profile_icon.png" alt="プロフィールアイコン" width="64" height="64">
-      <div>
-        <div class="author-name">ただのちゃる</div>
-        <div class="author-desc">GeoGuessr歴1年。世界マップを日本語で攻略・紹介しています。</div>
-        <div class="author-sns"><a href="#">X (Twitter)</a></div>
-      </div>
-    </section>
-  </main>
+        <section class="profile">
+          <h2>このサイトの作成者は誰？？</h2>
+          <p>初めまして!
+            <br>このWebサイトを執筆した「ただのちゃる」です。
+            <br>筆者は、GeoGuessrを2024年4月から世界マップを本格的に始め、Geoguessr歴はちょうど1年ちょいです！
+            <br>私は、Geoguessrの世界マップをプレイする日本人の方が少ない、、という現状を少しでも改善したく、このようなGeoguessr世界マップ攻略サイトを立ち上げました!
+            <br>Webサイトは順次更新予定ですので、何かアドバイスや意見などありましたらどしどしコメントしてください！お待ちしてます！
+          </p>
+        </section>
 
+        <section id="news" class="news">
+          <h2>📢 GeoGuessr新着情報</h2>
+          <ul>
+            <li>
+              GeoGuessr世界大会2025がコペンハーゲン（デンマーク）にて8月29日から開催
+              <a href="https://www.geoguessr.com/ja/world-championship" target="_blank" rel="noopener"
+                >GeoGuessr世界大会2025ホームページ</a>
+              <a href="#" target="_blank" rel="noopener"
+                >GeoGuessr大会2025決勝戦 (YouTube)</a>
+              >
+            </li>
+            <li>GeoGuessrに新国「ベトナム🇻🇳」追加（2025年6月28日）</li>
+            <li>GeoGuessrに新国「ナミビア🇳🇦」追加（2025年6月4日）</li>
+            <li>GeoGuessrに新国「オマーン🇴🇲」追加（2024年10月29日）</li>
+            <li>GeoGuessrに新国「リヒテンシュタイン🇱🇮」追加（2024年10月4日）</li>
+            <a href="https://x.com/virtualstreets_?s=11&t=uSNXqca5FQZ9ru2pRqoR3A" target="_blank" rel="noopener"
+                >GOogle Street Viewの更新に関する情報はこちら</a>
+          </ul>
+        </section>
+
+        <section class="hint">
+          <h2>🧠 今日のGeoGuessr攻略ヒント</h2>
+          <!-- 画像（Street View埋め込み） -->
+          <div class="sv-wrap">
+            <iframe id="hint-frame"
+                    title="ヒント用ストリートビュー"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="">
+            </iframe>
+          </div>
+          <!-- この画像から読み取れるヒント -->
+          <ul id="hint-list"></ul>
+        </section>
+
+        <!-- =================== ホーム最下部：今日の一問 =================== -->
+        <section class="daily-quiz">
+          <div class="container">
+            <h2>🧩 今日の一問</h2>
+            <p>このGoogle Street Viewはどこの国で撮影されたものでしょう？</p>
+            <div class="sv-wrap">
+              <iframe id="sv-frame"
+                      allowfullscreen
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      src="">
+              </iframe>
+              <div class="sv-mask sv-mask-tl"></div> <!-- これを追加 -->
+            </div>
+            <div id="choices" class="choices" role="group" aria-label="選択肢"></div>
+            <div id="result" class="result" aria-live="polite"></div>
+            <div id="explanation" class="explanation"></div>
+            <div class="actions">
+              <button id="next-btn" style="display:none;">次の問題へ</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 筆者プロフィールカード -->
+        <section class="author-profile">
+          <img src="images/profile_icon.png" alt="プロフィールアイコン" width="64" height="64">
+          <div>
+            <div class="author-name">ただのちゃる</div>
+            <div class="author-desc">GeoGuessr歴は1年と少し。世界マップをメインに遊んでいます!Duelsはあまりやらず、ノーレートのTeam Duelsでよく遊んでいます。</div>
+            <div class="author-sns"><a href="#">X (Twitter)</a></div>
+          </div>
+        </section>
+    </main>
   <footer>
-    <small>© 2025 ただのちゃる。地図画像・データは各提供元に帰属。</small>
+    <small>
+      © 2025 ただのちゃる。地図画像・データは各提供元に帰属。
+      | <a href="contact.html">お問い合わせ</a>
+    </small>
   </footer>
 
   <!-- ページ専用スクリプト（ヒント） -->
