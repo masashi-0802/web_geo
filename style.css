@@ -51,32 +51,41 @@ main {
 }
 
 /* 目次（Table of Contents） */
-.toc{
-  color: #004643;
-  font-weight: bold;
-  font-size:17px;
-  margin:0 auto;
-  width:100%;
-  max-width:300px;
-  border: solid 1px #004643;
-  background: #fff;
-}
-.toc span {
-  display:block;
-  text-align:center;
-  color: #fff;
-  font-size: 25px;
-  background:#004643;
-  padding:8px;
-}
-.toc a{
-  color: #333; /*文字色を#333に設定*/
-  text-decoration: none; /*文字の装飾を無効化*/
+.toc {
+  margin-bottom: 30px;
+  border: 2px solid #791a3e;
+  border-radius: 3px;
 }
 
-.toc li{
-  list-style: none; /*リストのスタイルを無効化*/
-  padding-bottom: 5px; /*要素のbottom（下）に余白を5pxに設定*/
+.toc span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 10px 0;
+  background-color: #791a3e;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.toc span::before {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 5px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E");
+  content: '';
+}
+
+.toc li {
+  padding: 5px 0;
+  font-weight: 600;
+}
+
+.toc a {
+  color: #333;
+  text-decoration: none;
 }
 
 /* セクション見出し */
