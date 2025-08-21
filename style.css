@@ -170,10 +170,10 @@ a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 100px;
   height: 60px;
   background: #000;
-  opacity: 0.1; /* 透明度を下げて情報を隠す（より不透明に） */
+  opacity: 1; /* 透明度を下げて情報を隠す（より不透明に） */
   pointer-events: none;
 }
 #sv-frame {
